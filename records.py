@@ -6,9 +6,10 @@ def main():
     create_table()
     menu_options = {
     '1': add_record,
-     '2' : update_record,
-      '3' : delete_record,
-       '4' : search_records
+    '2' : update_record,
+    '3' : delete_record,
+    '4' : search_records,
+    '5' : view_all_records
        }
 
     while True:
@@ -66,12 +67,22 @@ def search_records():
             print(r)
     conn.close()
 
+def view_all_records():
+
+    conn = sqlite3.connect(database)
+    results = conn.execute('SELECT * FROM records')
+
+    for r in results:
+        print(r)
+    conn.close()
+
 def menu_ui():
 
-    print('1:Add record')
+    print('\n1:Add record')
     print('2:Update record')
     print('3:Delete record')
     print('4:Search records')
-    print('Q:Quit')
+    print('5:View all records')
+    print('Q:Quit\n')
 
 main()
